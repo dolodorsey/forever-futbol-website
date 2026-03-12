@@ -1,144 +1,71 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 
-// Palette: Base #0E1014, Light #F2EEE5, Accent1 #C6A65B (gold), Accent2 #335A42 (green), Support #1F4C7A (navy)
-const C = { base: "#0E1014", cream: "#F2EEE5", gold: "#C6A65B", green: "#335A42", navy: "#1F4C7A", steel: "#1A1C20", dim: "#6A6E75", deep: "#0A0B0D", warm: "#181A16" };
+const C={base:"#07070a",surface:"#0e0c10",border:"rgba(255,255,255,0.08)",gold:"#d4a832",goldDeep:"#8a6a1a",cream:"#f0ece4",muted:"rgba(255,255,255,0.48)",dim:"rgba(255,255,255,0.25)"};
+const F={serif:"'Cormorant Garamond','Playfair Display',Georgia,serif",sans:"'DM Sans','Inter',system-ui,sans-serif"};
+function useInView(t=0.1){const ref=useRef(null);const[v,setV]=useState(false);useEffect(()=>{const el=ref.current;if(!el)return;const o=new IntersectionObserver(([e])=>{if(e.isIntersecting)setV(true)},{threshold:t});o.observe(el);return()=>o.disconnect();},[]);return[ref,v];}
+function Reveal({children,d=0}){const[ref,v]=useInView();return<div ref={ref} style={{transform:v?"translateY(0)":"translateY(32px)",opacity:v?1:0,transition:`all 0.9s cubic-bezier(0.16,1,0.3,1) ${d}s`}}>{children}</div>;}
+const Grain=()=>(<div style={{position:"absolute",inset:0,opacity:0.04,pointerEvents:"none",backgroundImage:`url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`}}/>);
 
-function useInView(t = 0.12) { const ref = useRef<HTMLDivElement>(null); const [v, setV] = useState(false); useEffect(() => { const el = ref.current; if (!el) return; const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setV(true); obs.unobserve(el); } }, { threshold: t }); obs.observe(el); return () => obs.disconnect(); }, [t]); return [ref, v] as const; }
-function R({ children, delay = 0, dir = "up", style = {} }: { children: React.ReactNode; delay?: number; dir?: string; style?: React.CSSProperties }) { const [ref, vis] = useInView(); const t: Record<string, string> = { up: "translateY(50px)", left: "translateX(60px)", right: "translateX(-60px)" }; return <div ref={ref} style={{ ...style, opacity: vis ? 1 : 0, transform: vis ? "none" : t[dir] || t.up, transition: `all 0.9s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s`, willChange: "transform, opacity" }}>{children}</div>; }
-const Grain = () => <div style={{ position: "fixed", inset: 0, zIndex: 9999, pointerEvents: "none", mixBlendMode: "overlay", opacity: 0.035 }}><svg width="100%" height="100%"><filter id="g"><feTurbulence baseFrequency="0.55" numOctaves="3" stitchTiles="stitch" /></filter><rect width="100%" height="100%" filter="url(#g)" /></svg></div>;
+function Nav(){const[s,setS]=useState(false);useEffect(()=>{const h=()=>setS(window.scrollY>60);window.addEventListener("scroll",h,{passive:true});return()=>window.removeEventListener("scroll",h);},[]);return(<nav style={{position:"fixed",top:0,left:0,right:0,zIndex:100,padding:s?"14px clamp(24px,4vw,56px)":"24px clamp(24px,4vw,56px)",display:"flex",justifyContent:"space-between",alignItems:"center",background:s?"rgba(7,7,10,0.94)":"transparent",backdropFilter:s?"blur(24px)":"none",borderBottom:s?`1px solid ${C.border}`:"none",transition:"all 0.5s cubic-bezier(0.16,1,0.3,1)"}}><div><div style={{fontFamily:F.sans,fontSize:"8px",letterSpacing:"0.45em",textTransform:"uppercase",color:C.gold,marginBottom:"3px"}}>The World's New Football</div><span style={{fontFamily:F.serif,fontSize:"20px",fontWeight:600,color:C.cream}}>Forever Futbol</span></div><div style={{display:"flex",gap:"clamp(16px,2.5vw,36px)",alignItems:"center"}}>{["Experience","Tour","Groups","Partners"].map(n=>(<a key={n} href="#" style={{fontFamily:F.sans,fontSize:"10px",fontWeight:500,letterSpacing:"0.22em",textTransform:"uppercase",color:C.muted,textDecoration:"none"}}>{n}</a>))}<button style={{fontFamily:F.sans,fontSize:"10px",fontWeight:600,letterSpacing:"0.14em",textTransform:"uppercase",color:"#07070a",background:`linear-gradient(135deg,${C.gold},${C.goldDeep})`,border:"none",padding:"10px 26px",cursor:"pointer"}}>Get Tickets</button></div></nav>);}
 
-function Hero() {
-  const [ready, setReady] = useState(false);
-  useEffect(() => { setTimeout(() => setReady(true), 500); }, []);
-  return (
-    <section style={{ height: "100vh", position: "relative", overflow: "hidden", background: C.base }}>
-      <div style={{ position: "absolute", inset: 0, background: `radial-gradient(ellipse at 40% 50%, ${C.green}08, transparent 60%)` }} />
-      <div style={{ position: "absolute", top: "50%", left: "6vw", right: "6vw", height: 1, background: `linear-gradient(90deg, ${C.gold}10, ${C.gold}05, ${C.gold}10)`, opacity: ready ? 1 : 0, transition: "opacity 1.5s ease 0.8s" }} />
-      <div style={{ position: "absolute", bottom: "14vh", left: "6vw", zIndex: 3 }}>
-        <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, letterSpacing: "0.5em", textTransform: "uppercase", color: C.gold, marginBottom: 28, opacity: ready ? 1 : 0, transform: ready ? "translateX(0)" : "translateX(-20px)", transition: "all 1s ease 0.1s", display: "flex", alignItems: "center", gap: 12 }}>
-          <span style={{ width: 32, height: 1, background: C.gold, display: "inline-block" }} />Museum · Culture · Football
-        </div>
-        <h1 style={{ fontFamily: "'EB Garamond', serif", fontSize: "clamp(52px, 12vw, 180px)", fontWeight: 400, lineHeight: 0.88, letterSpacing: "-0.02em", color: C.cream, margin: 0 }}>
-          <span style={{ display: "block", opacity: ready ? 1 : 0, transform: ready ? "translateY(0)" : "translateY(100%)", transition: "all 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s" }}>Forever</span>
-          <span style={{ display: "block", fontStyle: "italic", color: C.gold, opacity: ready ? 1 : 0, transform: ready ? "translateY(0)" : "translateY(100%)", transition: "all 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.35s" }}>Futbol</span>
-        </h1>
-        <div style={{ marginTop: 36, marginLeft: "clamp(60px, 10vw, 160px)", opacity: ready ? 1 : 0, transform: ready ? "translateY(0)" : "translateY(20px)", transition: "all 0.8s ease 0.6s" }}>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(13px, 1.1vw, 16px)", fontWeight: 300, color: C.dim, lineHeight: 1.6, maxWidth: 340 }}>The museum of the beautiful game. Where football history becomes art, and every nation tells its story.</p>
-        </div>
-      </div>
-    </section>
-  );
-}
+const EXHIBITS=[{name:"Hall of Legends",desc:"Monumental icons, trophy-room drama, and heritage storytelling at museum scale.",accent:C.gold},{name:"World Cup Theater",desc:"Immersive cinematic football history with nation-scale energy and match-day emotion.",accent:"#4A9A6A"},{name:"Boots, Kits & Culture",desc:"The fashion, fandom, and aesthetic culture of football across generations.",accent:"#4A6A9A"},{name:"Street to Stadium",desc:"The bridge between grassroots football energy and world-stage glory.",accent:"#C85A1A"},{name:"The Beautiful Game",desc:"Technique, creativity, and the art of football translated into spatial experience.",accent:"#8A4A9A"},{name:"Nations & Flags",desc:"Cultural identity, football nationalism, and the power of the badge.",accent:"#9A4A4A"}];
+const CITIES=[{city:"Atlanta",status:"Flagship",dates:"Spring 2026"},{city:"Houston",status:"Upcoming",dates:"Summer 2026"},{city:"Los Angeles",status:"Planned",dates:"Fall 2026"},{city:"Miami",status:"Planned",dates:"Q4 2026"}];
 
-function NationPanels() {
-  const [expanded, setExpanded] = useState<number | null>(null);
-  const nations = [
-    { name: "Brazil", era: "1958 — Present", desc: "The gold standard. Five World Cups. Pelé, Ronaldo, Ronaldinho. Jogo bonito — the beautiful game personified.", color: "#2B6E1E", accent: "#E5C14A" },
-    { name: "Argentina", era: "1978 — Present", desc: "Passion distilled. Maradona's hand of god. Messi's redemption arc. La Albiceleste carries the weight of a nation.", color: "#4A8CC7", accent: "#F2EEE5" },
-    { name: "Italy", era: "1934 — Present", desc: "The architects. Catenaccio defense elevated to art. Four stars on the crest. Where tactics became theatre.", color: "#1A4B8C", accent: "#C6A65B" },
-    { name: "England", era: "1966 — Present", desc: "The birthplace. One trophy, eternal belief. The Premier League changed the game. Now the world watches.", color: "#1C3A5A", accent: "#E5E5E5" },
-    { name: "Germany", era: "1954 — Present", desc: "The machine. Precision and will. Four stars earned through relentless efficiency. Never count them out.", color: "#1A1A1A", accent: "#D4AF37" },
-    { name: "France", era: "1998 — Present", desc: "The evolution. Zidane's elegance to Mbappé's speed. Two stars. Where football meets art.", color: "#1A2850", accent: "#C82424" },
-  ];
+export default function ForeverFutbolV3(){const[loaded,setLoaded]=useState(false);const[hover,setHover]=useState(null);useEffect(()=>{setTimeout(()=>setLoaded(true),80);},[]);
+return(<div style={{background:C.base}}>
+<Nav/>
+<section style={{minHeight:"100vh",position:"relative",overflow:"hidden",background:`radial-gradient(ellipse at 50% 80%, rgba(212,168,50,0.12) 0%, transparent 60%), ${C.base}`,display:"flex",flexDirection:"column",justifyContent:"flex-end",padding:"0 clamp(32px,6vw,96px) 96px"}}>
+<Grain/>
+<div style={{position:"absolute",top:"15%",left:"50%",transform:"translateX(-50%)",width:"700px",height:"700px",borderRadius:"50%",background:`radial-gradient(circle, rgba(212,168,50,0.12), transparent 70%)`,pointerEvents:"none"}}/>
+<div style={{position:"relative",zIndex:2,maxWidth:"1400px",margin:"0 auto",width:"100%",textAlign:"center"}}>
+<div style={{fontFamily:F.sans,fontSize:"9px",letterSpacing:"0.55em",textTransform:"uppercase",color:C.gold,opacity:loaded?1:0,transition:"opacity 0.9s ease 0.3s",marginBottom:"32px"}}>Culture Experience · Touring Museum · Football Heritage</div>
+<h1 style={{fontFamily:F.serif,fontSize:"clamp(48px,9vw,130px)",fontWeight:600,lineHeight:0.9,letterSpacing:"-0.02em",color:C.cream,opacity:loaded?1:0,transform:loaded?"translateY(0)":"translateY(40px)",transition:"all 1.1s cubic-bezier(0.16,1,0.3,1) 0.6s"}}>The World's New<br/>Football <em style={{color:C.gold}}>Culture</em><br/><em>Experience</em></h1>
+<p style={{fontFamily:F.sans,fontSize:"clamp(14px,1.2vw,17px)",lineHeight:1.8,color:C.muted,maxWidth:"560px",margin:"28px auto 0",opacity:loaded?1:0,transition:"opacity 0.9s ease 1.0s"}}>An immersive touring museum celebrating global football culture — its history, its icons, its fashion, and its power to unite every corner of the world.</p>
+<div style={{display:"flex",gap:"16px",justifyContent:"center",marginTop:"44px",opacity:loaded?1:0,transition:"opacity 0.9s ease 1.3s",flexWrap:"wrap"}}>
+<button style={{fontFamily:F.sans,fontSize:"10px",fontWeight:600,letterSpacing:"0.15em",textTransform:"uppercase",color:"#07070a",background:`linear-gradient(135deg,${C.gold},${C.goldDeep})`,border:"none",padding:"16px 44px",cursor:"pointer"}}>Explore the Tour</button>
+<button style={{fontFamily:F.sans,fontSize:"10px",fontWeight:500,letterSpacing:"0.15em",textTransform:"uppercase",color:C.cream,background:"transparent",border:`1px solid ${C.border}`,padding:"16px 38px",cursor:"pointer"}}>Group & Partners</button>
+</div></div></section>
 
-  return (
-    <section style={{ padding: "120px 6vw", background: C.deep }}>
-      <R><div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, letterSpacing: "0.4em", textTransform: "uppercase", color: C.gold, marginBottom: 64, display: "flex", alignItems: "center", gap: 12 }}><span style={{ width: 32, height: 1, background: C.gold, display: "inline-block" }} />The Nations</div></R>
-      <R delay={0.1}><h2 style={{ fontFamily: "'EB Garamond', serif", fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 400, lineHeight: 0.95, color: C.cream, margin: "0 0 64px" }}>Every nation.<br /><em style={{ color: C.gold }}>Every story.</em></h2></R>
+<section style={{background:C.base,padding:"120px clamp(32px,6vw,96px)"}}>
+<div style={{maxWidth:"1400px",margin:"0 auto"}}>
+<Reveal><div style={{fontFamily:F.sans,fontSize:"9px",letterSpacing:"0.48em",textTransform:"uppercase",color:C.gold,marginBottom:"16px"}}>Exhibition Worlds</div>
+<h2 style={{fontFamily:F.serif,fontSize:"clamp(36px,5vw,72px)",fontWeight:600,lineHeight:1.0,color:C.cream,marginBottom:"64px"}}>Inside the Experience</h2></Reveal>
+<div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(280px,1fr))",gap:"2px",background:C.border}}>
+{EXHIBITS.map((ex,i)=>(<div key={ex.name} onMouseEnter={()=>setHover(i)} onMouseLeave={()=>setHover(null)} style={{background:hover===i?C.surface:C.base,padding:"44px 32px",cursor:"pointer",transition:"background 0.3s"}}>
+<div style={{width:"40px",height:"2px",background:`linear-gradient(90deg,${ex.accent},transparent)`,marginBottom:"24px"}}/>
+<div style={{fontFamily:F.serif,fontSize:"26px",fontWeight:600,color:C.cream,marginBottom:"14px"}}>{ex.name}</div>
+<p style={{fontFamily:F.sans,fontSize:"13px",lineHeight:1.7,color:C.muted}}>{ex.desc}</p>
+</div>))}
+</div></div></section>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 3 }}>
-        {nations.map((n, i) => (
-          <R key={n.name} delay={0.06 * i}>
-            <div onClick={() => setExpanded(expanded === i ? null : i)} style={{
-              background: expanded === i ? n.color : C.steel,
-              padding: expanded === i ? "clamp(40px, 4vw, 64px)" : "clamp(28px, 2.5vw, 44px)",
-              cursor: "pointer", position: "relative", overflow: "hidden",
-              transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
-              border: `1px solid ${expanded === i ? n.accent + "30" : C.steel}`,
-              gridColumn: expanded === i ? "1 / -1" : "auto",
-              minHeight: expanded === i ? 220 : "auto",
-            }}>
-              <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, letterSpacing: "0.2em", textTransform: "uppercase", color: n.accent, marginBottom: 8, transition: "color 0.4s ease" }}>{n.era}</div>
-              <h3 style={{ fontFamily: "'EB Garamond', serif", fontSize: expanded === i ? "clamp(32px, 4vw, 52px)" : "clamp(22px, 2.5vw, 32px)", fontWeight: 500, color: C.cream, margin: "0 0 12px", transition: "font-size 0.4s ease" }}>{n.name}</h3>
-              <div style={{ maxHeight: expanded === i ? 180 : 0, opacity: expanded === i ? 1 : 0, overflow: "hidden", transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)" }}>
-                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, fontWeight: 300, lineHeight: 1.7, color: C.cream, opacity: 0.6, maxWidth: 500, marginBottom: 20 }}>{n.desc}</p>
-                <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, letterSpacing: "0.2em", textTransform: "uppercase", color: n.accent, borderBottom: `1px solid ${n.accent}40`, paddingBottom: 2 }}>Enter Exhibit →</span>
-              </div>
-            </div>
-          </R>
-        ))}
-      </div>
-    </section>
-  );
-}
+<section style={{background:C.surface,padding:"120px clamp(32px,6vw,96px)",position:"relative",overflow:"hidden"}}>
+<div style={{maxWidth:"1400px",margin:"0 auto"}}>
+<Reveal><div style={{fontFamily:F.sans,fontSize:"9px",letterSpacing:"0.48em",textTransform:"uppercase",color:C.gold,marginBottom:"16px"}}>City Rollout</div>
+<h2 style={{fontFamily:F.serif,fontSize:"clamp(36px,5vw,72px)",fontWeight:600,color:C.cream,marginBottom:"48px"}}>The Touring Schedule</h2></Reveal>
+<div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:"2px",background:C.border}}>
+{CITIES.map(c=>(<div key={c.city} style={{background:C.base,padding:"40px 32px"}}>
+<div style={{fontFamily:F.serif,fontSize:"28px",fontWeight:600,color:C.cream,marginBottom:"8px"}}>{c.city}</div>
+<div style={{fontFamily:F.sans,fontSize:"11px",color:C.gold,marginBottom:"12px"}}>{c.dates}</div>
+<span style={{fontFamily:F.sans,fontSize:"8px",fontWeight:600,letterSpacing:"0.25em",textTransform:"uppercase",color:C.gold,padding:"6px 14px",border:`1px solid rgba(212,168,50,0.3)`}}>{c.status}</span>
+</div>))}
+</div></div></section>
 
-function Exhibits() {
-  return (
-    <section style={{ padding: "140px 6vw", background: C.base }}>
-      <R><h2 style={{ fontFamily: "'EB Garamond', serif", fontSize: "clamp(48px, 8vw, 120px)", fontWeight: 400, fontStyle: "italic", lineHeight: 0.9, color: C.cream, margin: "0 0 80px" }}>Exhibits.</h2></R>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)" }}>
-        {[{ v: "6", u: "", l: "Nations Featured" }, { v: "200", u: "+", l: "Artifacts" }, { v: "4", u: "", l: "Touring Cities" }, { v: "∞", u: "", l: "Passion" }].map((s, i) => (
-          <R key={s.l} delay={0.08 + i * 0.08}>
-            <div style={{ padding: "40px 20px 40px 0", borderLeft: i > 0 ? `1px solid ${C.steel}` : "none", paddingLeft: i > 0 ? 20 : 0 }}>
-              <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "clamp(48px, 6vw, 80px)", fontWeight: 400, color: C.gold, lineHeight: 1, display: "flex", alignItems: "baseline" }}>{s.v}<span style={{ fontSize: "clamp(14px, 1.5vw, 20px)", fontFamily: "'DM Mono', monospace", marginLeft: 2, color: C.dim }}>{s.u}</span></div>
-              <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, letterSpacing: "0.25em", textTransform: "uppercase", color: C.dim, marginTop: 12 }}>{s.l}</div>
-            </div>
-          </R>
-        ))}
-      </div>
-    </section>
-  );
-}
+<section style={{background:C.base,padding:"120px clamp(32px,6vw,96px)",position:"relative",overflow:"hidden"}}>
+<Grain/>
+<div style={{position:"absolute",inset:0,background:`radial-gradient(ellipse at 50% 50%, rgba(212,168,50,0.08), transparent 65%)`}}/>
+<div style={{maxWidth:"860px",margin:"0 auto",textAlign:"center",position:"relative",zIndex:2}}>
+<Reveal>
+<h2 style={{fontFamily:F.serif,fontSize:"clamp(36px,5vw,72px)",fontWeight:600,color:C.cream,lineHeight:1.0,marginBottom:"24px"}}>Carry the Culture Home.</h2>
+<p style={{fontFamily:F.sans,fontSize:"16px",lineHeight:1.8,color:C.muted,maxWidth:"520px",margin:"0 auto 44px"}}>A premium retail layer with collectible drops, limited apparel, and football memorabilia curated by the Forever Futbol team.</p>
+<div style={{display:"flex",gap:"16px",justifyContent:"center",flexWrap:"wrap"}}>
+<button style={{fontFamily:F.sans,fontSize:"10px",fontWeight:600,letterSpacing:"0.15em",textTransform:"uppercase",color:"#07070a",background:`linear-gradient(135deg,${C.gold},${C.goldDeep})`,border:"none",padding:"16px 44px",cursor:"pointer"}}>Shop Merch</button>
+<button style={{fontFamily:F.sans,fontSize:"10px",fontWeight:500,letterSpacing:"0.15em",textTransform:"uppercase",color:C.cream,background:"transparent",border:`1px solid ${C.border}`,padding:"16px 36px",cursor:"pointer"}}>Become a Partner</button>
+</div></Reveal></div></section>
 
-function Conversion() {
-  const [email, setEmail] = useState(""); const [done, setDone] = useState(false);
-  return (
-    <section id="contact" style={{ minHeight: "70vh", background: C.deep, display: "flex", alignItems: "center", position: "relative", overflow: "hidden" }}>
-      <div style={{ position: "absolute", right: "-3vw", top: "50%", transform: "translateY(-50%)", fontFamily: "'EB Garamond', serif", fontSize: "clamp(200px, 35vw, 500px)", fontWeight: 700, fontStyle: "italic", color: C.steel, opacity: 0.04 }}>FF</div>
-      <div style={{ padding: "100px 6vw", position: "relative", zIndex: 1 }}>
-        <R><h2 style={{ fontFamily: "'EB Garamond', serif", fontSize: "clamp(48px, 10vw, 140px)", fontWeight: 400, lineHeight: 0.88, color: C.cream, margin: "0 0 40px" }}>Enter the<br /><em style={{ color: C.gold }}>Museum.</em></h2></R>
-        <R delay={0.15}><div style={{ maxWidth: 480 }}>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, fontWeight: 300, lineHeight: 1.7, color: C.dim, marginBottom: 36 }}>Exhibit announcements, touring schedule, and exclusive collector access.</p>
-          {!done ? (
-            <div style={{ display: "flex", border: `1px solid ${C.steel}` }}>
-              <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="your@email.com" style={{ flex: 1, padding: "16px 20px", fontFamily: "'DM Mono', monospace", fontSize: 13, border: "none", outline: "none", background: "transparent", color: C.cream }} />
-              <button onClick={() => email && setDone(true)} style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, letterSpacing: "0.2em", textTransform: "uppercase", padding: "16px 28px", background: C.green, color: C.cream, border: "none", cursor: "pointer", transition: "background 0.3s ease" }} onMouseEnter={(e) => { (e.target as HTMLElement).style.background = C.gold; (e.target as HTMLElement).style.color = C.base; }} onMouseLeave={(e) => { (e.target as HTMLElement).style.background = C.green; (e.target as HTMLElement).style.color = C.cream; }}>Join</button>
-            </div>
-          ) : <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 24, fontStyle: "italic", color: C.gold }}>Welcome to the museum.</div>}
-        </div></R>
-      </div>
-    </section>
-  );
-}
-
-function Nav() {
-  const [s, setS] = useState(false);
-  useEffect(() => { const fn = () => setS(window.scrollY > 80); window.addEventListener("scroll", fn, { passive: true }); return () => window.removeEventListener("scroll", fn); }, []);
-  return <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, padding: "22px 6vw", display: "flex", justifyContent: "space-between", alignItems: "center", background: s ? `${C.base}F2` : "transparent", backdropFilter: s ? "blur(24px)" : "none", borderBottom: s ? `1px solid ${C.steel}` : "1px solid transparent", transition: "all 0.5s ease" }}>
-    <a href="#" style={{ fontFamily: "'EB Garamond', serif", fontSize: 18, fontWeight: 500, color: C.cream, textDecoration: "none" }}>Forever <span style={{ fontStyle: "italic", color: C.gold }}>Futbol</span></a>
-    <div style={{ display: "flex", gap: 28, alignItems: "center" }}>
-      {["Nations", "Exhibits"].map(i => <a key={i} href="#" style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, letterSpacing: "0.2em", textTransform: "uppercase", color: C.dim, textDecoration: "none", transition: "color 0.3s" }} onMouseEnter={(e) => { (e.target as HTMLElement).style.color = C.cream; }} onMouseLeave={(e) => { (e.target as HTMLElement).style.color = C.dim; }}>{i}</a>)}
-      <a href="#contact" style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, letterSpacing: "0.15em", textTransform: "uppercase", color: C.base, background: C.gold, padding: "8px 18px", textDecoration: "none" }}>Visit</a>
-    </div>
-  </nav>;
-}
-
-function Footer() {
-  return <footer style={{ background: C.base, padding: "56px 6vw 40px", borderTop: `1px solid ${C.steel}` }}>
-    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
-      <div>
-        <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 18, color: C.cream, marginBottom: 8 }}>Forever <span style={{ fontStyle: "italic", color: C.gold }}>Futbol</span></div>
-        <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: C.dim, opacity: 0.3 }}>© 2026 Forever Futbol Museum — A Kollective Hospitality Group Brand</div>
-      </div>
-      <div style={{ display: "flex", gap: 24 }}>{["Instagram", "Press", "Legal"].map(l => <a key={l} href="#" style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, letterSpacing: "0.15em", textTransform: "uppercase", color: C.dim, textDecoration: "none", opacity: 0.3, transition: "opacity 0.3s" }} onMouseEnter={(e) => { (e.target as HTMLElement).style.opacity = "1"; }} onMouseLeave={(e) => { (e.target as HTMLElement).style.opacity = "0.3"; }}>{l}</a>)}</div>
-    </div>
-  </footer>;
-}
-
-export default function ForeverFutbol() {
-  return <main style={{ overflowX: "hidden" }}>
-    <style>{`@media (max-width: 900px) { div[style*="repeat(4"] { grid-template-columns: 1fr 1fr !important; } div[style*="repeat(3"] { grid-template-columns: 1fr !important; } h1 { font-size: 52px !important; } nav > div:first-child ~ div a:not(:last-child) { display: none; } }`}</style>
-    <Grain /><Nav /><Hero /><NationPanels /><Exhibits /><Conversion /><Footer />
-  </main>;
-}
+<footer style={{background:"#060609",borderTop:`1px solid ${C.border}`,padding:"64px clamp(32px,6vw,96px) 40px"}}>
+<div style={{maxWidth:"1400px",margin:"0 auto",display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:"16px"}}>
+<div><div style={{fontFamily:F.serif,fontSize:"24px",fontWeight:600,color:C.cream,marginBottom:"8px"}}>Forever Futbol</div><p style={{fontFamily:F.sans,fontSize:"13px",color:C.muted}}>The world's new football culture experience.</p></div>
+<div style={{fontFamily:F.sans,fontSize:"11px",color:"rgba(255,255,255,0.22)"}}>© 2026 Forever Futbol. A KHG Enterprise.</div>
+</div></footer>
+</div>);}
