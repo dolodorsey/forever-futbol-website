@@ -52,7 +52,7 @@ function Nav() {
         {["Experience", "Tour", "Groups", "Partners"].map(n => (
           <a key={n} href={`#${n.toLowerCase()}`} style={{ fontFamily: F.sans, fontSize: "10px", fontWeight: 500, letterSpacing: "0.22em", textTransform: "uppercase", color: C.muted, textDecoration: "none", transition: "color 0.3s" }} onMouseEnter={e => e.target.style.color = C.cream} onMouseLeave={e => e.target.style.color = C.muted}>{n}</a>
         ))}
-        <button style={{ fontFamily: F.sans, fontSize: "10px", fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "#07070a", background: `linear-gradient(135deg, ${C.gold}, ${C.goldDeep})`, border: "none", padding: "10px 26px", cursor: "pointer", transition: "all 0.3s" }} onMouseEnter={e => { e.target.style.transform = "translateY(-2px)"; }} onMouseLeave={e => { e.target.style.transform = "translateY(0)"; }}>Get Tickets</button>
+        <button style={{ fontFamily: F.sans, fontSize: "10px", fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "#07070a", background: `linear-gradient(135deg, ${C.gold}, ${C.goldDeep})`, border: "none", padding: "10px 26px", cursor: "pointer", transition: "all 0.3s" }}>Get Tickets</button>
       </div>
     </nav>
   );
@@ -89,8 +89,8 @@ function Hero() {
             An immersive touring museum celebrating global football culture — its history, its icons, its fashion, and its power to unite every corner of the world.
           </p>
           <div style={{ display: "flex", gap: "16px", justifyContent: "center", marginTop: "44px", opacity: loaded ? 1 : 0, transition: "opacity 0.9s ease 1.3s", flexWrap: "wrap" }}>
-            <button style={{ fontFamily: F.sans, fontSize: "10px", fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: "#07070a", background: `linear-gradient(135deg, ${C.gold}, ${C.goldDeep})`, border: "none", padding: "16px 44px", cursor: "pointer", transition: "all 0.3s" }} onMouseEnter={e => { e.target.style.transform = "translateY(-2px)"; }} onMouseLeave={e => { e.target.style.transform = "translateY(0)"; }}>Explore the Tour</button>
-            <button style={{ fontFamily: F.sans, fontSize: "10px", fontWeight: 500, letterSpacing: "0.15em", textTransform: "uppercase", color: C.cream, background: "transparent", border: `1px solid ${C.border}`, padding: "16px 38px", cursor: "pointer", transition: "all 0.3s" }} onMouseEnter={e => { e.target.style.borderColor = C.gold; e.target.style.color = C.gold; }} onMouseLeave={e => { e.target.style.borderColor = C.border; e.target.style.color = C.cream; }}>Group & Partners</button>
+            <button style={{ fontFamily: F.sans, fontSize: "10px", fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: "#07070a", background: `linear-gradient(135deg, ${C.gold}, ${C.goldDeep})`, border: "none", padding: "16px 44px", cursor: "pointer", transition: "all 0.3s" }}>Explore the Tour</button>
+            <button style={{ fontFamily: F.sans, fontSize: "10px", fontWeight: 500, letterSpacing: "0.15em", textTransform: "uppercase", color: C.cream, background: "transparent", border: `1px solid ${C.border}`, padding: "16px 38px", cursor: "pointer", transition: "all 0.3s" }}>Group & Partners</button>
           </div>
         </div>
       </div>
@@ -125,7 +125,7 @@ function Exhibits() {
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "2px", background: C.border }}>
           {EXHIBITS.map((ex, i) => (
-            <div key={ex.name} onMouseEnter={() => setHover(i)} onMouseLeave={() => setHover(null)} style={{ background: hover === i ? C.surface : C.base, padding: "44px 32px", cursor: "pointer", transition: "background 0.3s", position: "relative", overflow: "hidden" }}>
+            <div key={ex.name}>
               {hover === i && <div style={{ position: "absolute", inset: 0, background: `radial-gradient(circle at 80% 20%, ${ex.accent}15, transparent 70%)` }} />}
               <div style={{ position: "relative", zIndex: 1 }}>
                 <div style={{ width: "40px", height: "2px", background: `linear-gradient(90deg, ${ex.accent}, transparent)`, marginBottom: "24px" }} />
@@ -228,7 +228,7 @@ function GroupsPartners() {
                 <div style={{ fontFamily: F.sans, fontSize: "9px", fontWeight: 600, letterSpacing: "0.4em", textTransform: "uppercase", color: C.gold, marginBottom: "16px" }}>0{i + 1}</div>
                 <div style={{ fontFamily: F.serif, fontSize: "28px", fontWeight: 600, color: C.cream, marginBottom: "14px" }}>{p.title}</div>
                 <p style={{ fontFamily: F.sans, fontSize: "14px", lineHeight: 1.75, color: C.muted, marginBottom: "28px" }}>{p.desc}</p>
-                <button style={{ fontFamily: F.sans, fontSize: "9px", fontWeight: 600, letterSpacing: "0.25em", textTransform: "uppercase", color: C.gold, background: "transparent", border: `1px solid ${C.gold}30`, padding: "10px 24px", cursor: "pointer", transition: "all 0.3s" }} onMouseEnter={e => { e.target.style.background = `${C.gold}15`; e.target.style.transform = "translateY(-2px)"; }} onMouseLeave={e => { e.target.style.background = "transparent"; e.target.style.transform = "translateY(0)"; }}>{p.cta} →</button>
+                <button style={{ fontFamily: F.sans, fontSize: "9px", fontWeight: 600, letterSpacing: "0.25em", textTransform: "uppercase", color: C.gold, background: "transparent", border: `1px solid ${C.gold}30`, padding: "10px 24px", cursor: "pointer", transition: "all 0.3s" }}>{p.cta} →</button>
               </div>
             </div>
           ))}
@@ -255,7 +255,7 @@ function MerchRetail() {
           </p>
           <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap" }}>
             <button style={{ fontFamily: F.sans, fontSize: "10px", fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: "#07070a", background: `linear-gradient(135deg, ${C.gold}, ${C.goldDeep})`, border: "none", padding: "16px 48px", cursor: "pointer", transition: "all 0.3s" }} onMouseEnter={e => e.target.style.transform = "translateY(-2px)"} onMouseLeave={e => e.target.style.transform = "translateY(0)"}>Shop Merch</button>
-            <button style={{ fontFamily: F.sans, fontSize: "10px", fontWeight: 500, letterSpacing: "0.15em", textTransform: "uppercase", color: C.cream, background: "transparent", border: `1px solid ${C.border}`, padding: "16px 40px", cursor: "pointer", transition: "all 0.3s" }} onMouseEnter={e => { e.target.style.borderColor = C.gold; e.target.style.color = C.gold; }} onMouseLeave={e => { e.target.style.borderColor = C.border; e.target.style.color = C.cream; }}>Collectibles Drop</button>
+            <button style={{ fontFamily: F.sans, fontSize: "10px", fontWeight: 500, letterSpacing: "0.15em", textTransform: "uppercase", color: C.cream, background: "transparent", border: `1px solid ${C.border}`, padding: "16px 40px", cursor: "pointer", transition: "all 0.3s" }}>Collectibles Drop</button>
           </div>
         </Reveal>
       </div>
@@ -266,9 +266,8 @@ function MerchRetail() {
 // ─── FOOTER ───────────────────────────────────────────────────────────────────
 function Footer() {
   return (
-    
+    <>
       <EventbriteTickets />
-
       <footer style={{ background: "#060609", borderTop: `1px solid ${C.border}`, padding: "64px clamp(32px,6vw,96px) 40px" }}>
       <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1.5fr repeat(3,1fr)", gap: "48px", marginBottom: "64px" }}>
@@ -298,6 +297,7 @@ function Footer() {
         </div>
       </div>
     </footer>
+    </>
   );
 }
 
@@ -323,8 +323,7 @@ function EventbriteTickets() {
               background:"rgba(255,255,255,0.04)", border:"1px solid rgba(255,255,255,0.08)",
               textDecoration:"none", color:"inherit",
               transition:"all 0.3s ease", cursor:"pointer"
-            }} onMouseEnter={(e:any)=>{e.currentTarget.style.background="rgba(255,255,255,0.08)";e.currentTarget.style.transform="translateX(4px)"}}
-            onMouseLeave={(e:any)=>{e.currentTarget.style.background="rgba(255,255,255,0.04)";e.currentTarget.style.transform="translateX(0)"}}>
+            }}>
               <div>
                 <div style={{fontSize:"14px",fontWeight:700,color:"#fff"}}>Event 1</div>
                 <div style={{fontSize:"11px",color:"rgba(255,255,255,0.4)",marginTop:"2px"}}>Eventbrite · Tickets Available</div>
@@ -337,8 +336,7 @@ function EventbriteTickets() {
               background:"rgba(255,255,255,0.04)", border:"1px solid rgba(255,255,255,0.08)",
               textDecoration:"none", color:"inherit",
               transition:"all 0.3s ease", cursor:"pointer"
-            }} onMouseEnter={(e:any)=>{e.currentTarget.style.background="rgba(255,255,255,0.08)";e.currentTarget.style.transform="translateX(4px)"}}
-            onMouseLeave={(e:any)=>{e.currentTarget.style.background="rgba(255,255,255,0.04)";e.currentTarget.style.transform="translateX(0)"}}>
+            }}>
               <div>
                 <div style={{fontSize:"14px",fontWeight:700,color:"#fff"}}>Event 2</div>
                 <div style={{fontSize:"11px",color:"rgba(255,255,255,0.4)",marginTop:"2px"}}>Eventbrite · Tickets Available</div>
@@ -351,8 +349,7 @@ function EventbriteTickets() {
               background:"rgba(255,255,255,0.04)", border:"1px solid rgba(255,255,255,0.08)",
               textDecoration:"none", color:"inherit",
               transition:"all 0.3s ease", cursor:"pointer"
-            }} onMouseEnter={(e:any)=>{e.currentTarget.style.background="rgba(255,255,255,0.08)";e.currentTarget.style.transform="translateX(4px)"}}
-            onMouseLeave={(e:any)=>{e.currentTarget.style.background="rgba(255,255,255,0.04)";e.currentTarget.style.transform="translateX(0)"}}>
+            }}>
               <div>
                 <div style={{fontSize:"14px",fontWeight:700,color:"#fff"}}>Event 3</div>
                 <div style={{fontSize:"11px",color:"rgba(255,255,255,0.4)",marginTop:"2px"}}>Eventbrite · Tickets Available</div>
