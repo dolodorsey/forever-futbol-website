@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 
 const C={base:"#07070a",surface:"#0e0c10",border:"rgba(255,255,255,0.08)",gold:"#d4a832",goldDeep:"#8a6a1a",cream:"#f0ece4",muted:"rgba(255,255,255,0.48)",dim:"rgba(255,255,255,0.25)"};
 const F={serif:"'Cormorant Garamond','Playfair Display',Georgia,serif",sans:"'DM Sans','Inter',system-ui,sans-serif"};
-function useInView(t=0.1){const ref=useRef(null);const[v,setV]=useState(false);useEffect(()=>{const el=ref.current;if(!el)return;const o=new IntersectionObserver(([e])=>{if(e.isIntersecting)setV(true)},{threshold:t});o.observe(el);return()=>o.disconnect();},[]);return[ref,v];}
+function useInView(t=0.1){const ref=useRef<HTMLDivElement>(null);const[v,setV]=useState(false);useEffect(()=>{const el=ref.current;if(!el)return;const o=new IntersectionObserver(([e])=>{if(e.isIntersecting)setV(true)},{threshold:t});o.observe(el);return()=>o.disconnect();},[]);return[ref,v];}
 function Reveal({children, d = 0}: {children: ReactNode; d?: number}){const[ref,v]=useInView();return<div ref={ref} style={{transform:v?"translateY(0)":"translateY(32px)",opacity:v?1:0,transition:`all 0.9s cubic-bezier(0.16,1,0.3,1) ${d}s`}}>{children}</div>;}
 const Grain=()=>(<div style={{position:"absolute",inset:0,opacity:0.04,pointerEvents:"none",backgroundImage:`url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`}}/>);
 
@@ -66,7 +66,7 @@ return(<div style={{background:C.base}}>
 
 <footer style={{background:"#060609",borderTop:`1px solid ${C.border}`,padding:"64px clamp(32px,6vw,96px) 40px"}}>
 <div style={{maxWidth:"1400px",margin:"0 auto",display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:"16px"}}>
-<div><div style={{fontFamily:F.serif,fontSize:"24px",fontWeight:600,color:C.cream,marginBottom:"8px"}}>Forever Futbol</div><p style={{fontFamily:F.sans,fontSize:"13px",color:C.muted}}>The world's new football culture experience.</p></div>
+<div><div style={{fontFamily:F.serif,fontSize:"24px",fontWeight:600,color:C.cream,marginBottom:"8px"}}>Forever Futbol</div><p style={{fontFamily:F.sans,fontSize:"13px",color:C.muted}}>The world&apos;s new football culture experience.</p></div>
 <div style={{fontFamily:F.sans,fontSize:"11px",color:"rgba(255,255,255,0.22)"}}>© 2026 Forever Futbol. A KHG Enterprise.</div>
 </div></footer>
 </div>);}
