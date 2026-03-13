@@ -303,62 +303,32 @@ function Footer() {
 
 // ─── ROOT ─────────────────────────────────────────────────────────────────────
 
-// ─── EVENTBRITE TICKETS SECTION ───────────────────────────────────────
+// ─── TICKETS — REDIRECTS TO HUGLIFE ──────────────────────────────
 function EventbriteTickets() {
   return (
     <section id="tickets" style={{
-      padding:"80px 24px", maxWidth:"720px", margin:"0 auto",
-      position:"relative"
+      padding: "80px 24px", maxWidth: "720px", margin: "0 auto", textAlign: "center"
     }}>
-      <div style={{textAlign:"center",marginBottom:"40px"}}>
-        <div style={{fontSize:"10px",fontWeight:700,letterSpacing:"0.2em",color:"#FF6B35",marginBottom:"12px",textTransform:"uppercase"}}>TICKETS</div>
-        <h2 style={{fontFamily:"'Cormorant Garamond','Playfair Display',serif",fontSize:"clamp(28px,5vw,42px)",fontWeight:600,color:"#fff",lineHeight:1.15,marginBottom:"12px"}}>Upcoming Events</h2>
-        <p style={{fontSize:"14px",color:"rgba(255,255,255,0.45)",maxWidth:"400px",margin:"0 auto"}}>Secure your spot. All tickets powered by Eventbrite.</p>
+      <div style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "0.2em", color: "#D947A8", marginBottom: "14px", textTransform: "uppercase" }}>
+        TICKETS
       </div>
-      <div style={{display:"flex",flexDirection:"column",gap:"10px"}}>
-        
-            <a href="https://www.eventbrite.com/e/forever-futbol-tickets-1983442211046" target="_blank" rel="noopener noreferrer" style={{
-              display:"flex", justifyContent:"space-between", alignItems:"center",
-              padding:"16px 20px", borderRadius:"14px",
-              background:"rgba(255,255,255,0.04)", border:"1px solid rgba(255,255,255,0.08)",
-              textDecoration:"none", color:"inherit",
-              transition:"all 0.3s ease", cursor:"pointer"
-            }}>
-              <div>
-                <div style={{fontSize:"14px",fontWeight:700,color:"#fff"}}>Event 1</div>
-                <div style={{fontSize:"11px",color:"rgba(255,255,255,0.4)",marginTop:"2px"}}>Eventbrite · Tickets Available</div>
-              </div>
-              <div style={{padding:"8px 16px",borderRadius:"10px",background:"linear-gradient(135deg,#FF6B35,#FFB347)",color:"#000",fontSize:"11px",fontWeight:800,letterSpacing:"0.04em"}}>GET TICKETS</div>
-            </a>
-            <a href="https://www.eventbrite.com/e/forever-futbol-tickets-1983442556078" target="_blank" rel="noopener noreferrer" style={{
-              display:"flex", justifyContent:"space-between", alignItems:"center",
-              padding:"16px 20px", borderRadius:"14px",
-              background:"rgba(255,255,255,0.04)", border:"1px solid rgba(255,255,255,0.08)",
-              textDecoration:"none", color:"inherit",
-              transition:"all 0.3s ease", cursor:"pointer"
-            }}>
-              <div>
-                <div style={{fontSize:"14px",fontWeight:700,color:"#fff"}}>Event 2</div>
-                <div style={{fontSize:"11px",color:"rgba(255,255,255,0.4)",marginTop:"2px"}}>Eventbrite · Tickets Available</div>
-              </div>
-              <div style={{padding:"8px 16px",borderRadius:"10px",background:"linear-gradient(135deg,#FF6B35,#FFB347)",color:"#000",fontSize:"11px",fontWeight:800,letterSpacing:"0.04em"}}>GET TICKETS</div>
-            </a>
-            <a href="https://www.eventbrite.com/e/forever-futbol-tickets-1983442708534" target="_blank" rel="noopener noreferrer" style={{
-              display:"flex", justifyContent:"space-between", alignItems:"center",
-              padding:"16px 20px", borderRadius:"14px",
-              background:"rgba(255,255,255,0.04)", border:"1px solid rgba(255,255,255,0.08)",
-              textDecoration:"none", color:"inherit",
-              transition:"all 0.3s ease", cursor:"pointer"
-            }}>
-              <div>
-                <div style={{fontSize:"14px",fontWeight:700,color:"#fff"}}>Event 3</div>
-                <div style={{fontSize:"11px",color:"rgba(255,255,255,0.4)",marginTop:"2px"}}>Eventbrite · Tickets Available</div>
-              </div>
-              <div style={{padding:"8px 16px",borderRadius:"10px",background:"linear-gradient(135deg,#FF6B35,#FFB347)",color:"#000",fontSize:"11px",fontWeight:800,letterSpacing:"0.04em"}}>GET TICKETS</div>
-            </a>
-      </div>
-      <div style={{textAlign:"center",marginTop:"32px"}}>
-        <p style={{fontSize:"11px",color:"rgba(255,255,255,0.25)"}}>Powered by Eventbrite · Secure checkout</p>
+      <h2 style={{ fontFamily: "'Cormorant Garamond','Playfair Display',serif", fontSize: "clamp(28px,5vw,42px)", fontWeight: 600, color: "#fff", lineHeight: 1.15, marginBottom: "16px" }}>
+        Get Your Tickets
+      </h2>
+      <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.45)", maxWidth: "420px", margin: "0 auto 28px", lineHeight: 1.7 }}>
+        All event tickets are available on the official HugLife events hub. Browse dates, choose your event, and secure your spot.
+      </p>
+      <a href="https://huglife.vercel.app/#tickets" target="_blank" rel="noopener noreferrer" style={{
+        display: "inline-block", padding: "16px 40px", borderRadius: "14px",
+        background: "linear-gradient(135deg, #D947A8, #FF6B35)",
+        color: "#fff", fontSize: "13px", fontWeight: 800, letterSpacing: "0.06em",
+        textDecoration: "none", boxShadow: "0 8px 24px rgba(217,71,168,0.3)",
+        transition: "all 0.3s ease",
+      }}>
+        VIEW ALL EVENTS & TICKETS →
+      </a>
+      <div style={{ marginTop: "20px" }}>
+        <p style={{ fontSize: "11px", color: "rgba(255,255,255,0.2)" }}>Powered by Eventbrite · Secure checkout</p>
       </div>
     </section>
   );
