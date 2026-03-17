@@ -145,13 +145,35 @@ function Hero() {
         justifyContent: "flex-end",
       }}
     >
-      {/* ── VIDEO BACKGROUND ── */}
-      {/* ── VIDEO — contain preserves aspect ratio, no blur/stretch ── */}
+      {/* ── VIDEO BACKGROUND — 3-panel layout ── */}
       <div style={{
         position: "absolute", inset: 0,
         display: "flex", alignItems: "center", justifyContent: "center",
         background: C.base,
       }}>
+        {/* LEFT flanking video */}
+        <video
+          src="/museum/futbol-side.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          style={{
+            position: "absolute",
+            left: 0,
+            top: 0,
+            width: "22%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center",
+            opacity: loaded ? 0.6 : 0,
+            transition: "opacity 1.4s ease 0.2s",
+            maskImage: "linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.9) 40%, transparent 100%)",
+            WebkitMaskImage: "linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.9) 40%, transparent 100%)",
+          }}
+        />
+
+        {/* CENTER hero reel */}
         <video
           ref={videoRef}
           src="/museum/hero-reel.mp4"
@@ -166,12 +188,38 @@ function Hero() {
             objectFit: "contain",
             opacity: loaded ? 1 : 0,
             transition: "opacity 1.2s ease",
+            position: "relative",
+            zIndex: 2,
           }}
         />
-        {/* Cinematic side-fill bars — seal dark edges when video is narrower than viewport */}
+
+        {/* RIGHT flanking video */}
+        <video
+          src="/museum/futbol-side.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          style={{
+            position: "absolute",
+            right: 0,
+            top: 0,
+            width: "22%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center",
+            opacity: loaded ? 0.6 : 0,
+            transition: "opacity 1.4s ease 0.2s",
+            transform: "scaleX(-1)",
+            maskImage: "linear-gradient(to left, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.9) 40%, transparent 100%)",
+            WebkitMaskImage: "linear-gradient(to left, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.9) 40%, transparent 100%)",
+          }}
+        />
+
+        {/* Cinematic side-fill bars — outer edge fade */}
         <div style={{
-          position: "absolute", inset: 0, pointerEvents: "none",
-          background: `linear-gradient(to right, ${C.base} 0%, transparent 15%, transparent 85%, ${C.base} 100%)`,
+          position: "absolute", inset: 0, pointerEvents: "none", zIndex: 3,
+          background: `linear-gradient(to right, ${C.base} 0%, transparent 8%, transparent 92%, ${C.base} 100%)`,
         }} />
       </div>
 
