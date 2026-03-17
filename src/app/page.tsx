@@ -146,20 +146,34 @@ function Hero() {
       }}
     >
       {/* ── VIDEO BACKGROUND ── */}
-      <video
-        ref={videoRef}
-        src="/museum/hero-reel.mp4"
-        autoPlay
-        muted
-        loop
-        playsInline
-        style={{
-          position: "absolute", inset: 0, width: "100%", height: "100%",
-          objectFit: "cover", objectPosition: "center",
-          opacity: loaded ? 1 : 0,
-          transition: "opacity 1.2s ease",
-        }}
-      />
+      {/* ── VIDEO — contain preserves aspect ratio, no blur/stretch ── */}
+      <div style={{
+        position: "absolute", inset: 0,
+        display: "flex", alignItems: "center", justifyContent: "center",
+        background: C.base,
+      }}>
+        <video
+          ref={videoRef}
+          src="/museum/hero-reel.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          style={{
+            width: "auto",
+            height: "100%",
+            maxWidth: "100%",
+            objectFit: "contain",
+            opacity: loaded ? 1 : 0,
+            transition: "opacity 1.2s ease",
+          }}
+        />
+        {/* Cinematic side-fill bars — seal dark edges when video is narrower than viewport */}
+        <div style={{
+          position: "absolute", inset: 0, pointerEvents: "none",
+          background: `linear-gradient(to right, ${C.base} 0%, transparent 15%, transparent 85%, ${C.base} 100%)`,
+        }} />
+      </div>
 
       {/* ── GRADIENT OVERLAYS ── */}
       <div
@@ -820,58 +834,196 @@ function PullQuote() {
 }
 
 // ─── TICKETS ──────────────────────────────────────────────────────────────────
+// ─── TICKET DATA — LIVE EVENTBRITE ───────────────────────────────────────────
+const FF_TICKETS = [
+  {
+    city: "Atlanta",
+    date: "June 5, 2026",
+    status: "On Sale Now",
+    url: "https://www.eventbrite.com/e/forever-futbol-tickets-1983442211046",
+    note: "Flagship Launch",
+  },
+  {
+    city: "Washington DC",
+    date: "June 15, 2026",
+    status: "On Sale Now",
+    url: "https://www.eventbrite.com/e/forever-futbol-tickets-1983442556078",
+    note: "East Coast Stop",
+  },
+  {
+    city: "Los Angeles",
+    date: "June 25, 2026",
+    status: "On Sale Now",
+    url: "https://www.eventbrite.com/e/forever-futbol-tickets-1983442708534",
+    note: "West Coast Stop",
+  },
+];
+
 function Tickets() {
+  const [selectedCity, setSelectedCity] = useState(0);
+
   return (
     <section
       id="tickets"
-      style={{ padding: "120px clamp(32px,6vw,96px)", background: C.surface, position: "relative", overflow: "hidden" }}
+      style={{ padding: "120px clamp(32px,6vw,96px)", background: C.base, position: "relative", overflow: "hidden" }}
     >
       <Grain />
-      <div style={{ position: "absolute", inset: 0, background: `radial-gradient(ellipse at 50% 50%, ${C.gold}08, transparent 65%)` }} />
-      <div style={{ maxWidth: "760px", margin: "0 auto", textAlign: "center", position: "relative", zIndex: 2 }}>
+      <div style={{ position: "absolute", inset: 0, background: `radial-gradient(ellipse at 50% 40%, ${C.gold}06, transparent 60%)` }} />
+
+      <div style={{ maxWidth: "1200px", margin: "0 auto", position: "relative", zIndex: 2 }}>
         <Reveal>
-          <div style={{ fontFamily: F.sans, fontSize: "9px", letterSpacing: "0.48em", textTransform: "uppercase", color: C.gold, marginBottom: "24px" }}>
+          <div style={{ fontFamily: F.sans, fontSize: "9px", letterSpacing: "0.48em", textTransform: "uppercase", color: C.gold, marginBottom: "16px" }}>
             Secure Your Entry
           </div>
-          <h2 style={{ fontFamily: F.serif, fontSize: "clamp(36px,5vw,72px)", fontWeight: 600, color: C.cream, lineHeight: 1.0, marginBottom: "24px" }}>
-            Plan Your Visit
-          </h2>
-          <p style={{ fontFamily: F.sans, fontSize: "16px", lineHeight: 1.8, color: C.muted, maxWidth: "520px", margin: "0 auto 48px" }}>
-            Timed entry is limited by city and launch window. Reserve your place inside the world of Forever Futbol.
-          </p>
-          <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap" }}>
-            <a
-              href="https://huglife.vercel.app/#tickets"
-              target="_blank" rel="noopener noreferrer"
-              style={{
-                fontFamily: F.sans, fontSize: "10px", fontWeight: 600,
-                letterSpacing: "0.15em", textTransform: "uppercase",
-                color: "#07070a",
-                background: `linear-gradient(135deg, ${C.gold}, ${C.goldDeep})`,
-                border: "none", padding: "18px 52px", cursor: "pointer",
-                textDecoration: "none", display: "inline-block",
-                transition: "all 0.3s",
-              }}
-            >
-              View All Events & Tickets
-            </a>
-            <button
-              style={{
-                fontFamily: F.sans, fontSize: "10px", fontWeight: 500,
-                letterSpacing: "0.15em", textTransform: "uppercase",
-                color: C.cream, background: "transparent",
-                border: `1px solid ${C.border}`, padding: "18px 40px",
-                cursor: "pointer", transition: "all 0.3s",
-              }}
-            >
-              Join the Waitlist
-            </button>
-          </div>
-          <div style={{ marginTop: "24px", fontFamily: F.sans, fontSize: "11px", color: "rgba(255,255,255,0.2)" }}>
-            Powered by Eventbrite · Secure checkout
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: "24px", marginBottom: "64px" }}>
+            <h2 style={{ fontFamily: F.serif, fontSize: "clamp(36px,5vw,72px)", fontWeight: 600, color: C.cream, lineHeight: 0.95 }}>
+              Get Your Tickets
+            </h2>
+            <p style={{ fontFamily: F.sans, fontSize: "14px", lineHeight: 1.8, color: C.muted, maxWidth: "360px" }}>
+              Timed entry. Limited capacity per city. Reserve early — these sell out.
+            </p>
           </div>
         </Reveal>
+
+        {/* ── CITY TICKET CARDS ── */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "2px", background: `${C.gold}15`, marginBottom: "48px" }}>
+          {FF_TICKETS.map((t, i) => (
+            <Reveal key={t.city} delay={i * 0.08}>
+              <div
+                onClick={() => setSelectedCity(i)}
+                style={{
+                  background: selectedCity === i ? `linear-gradient(145deg, #0f0e0c, #1a1710)` : C.surface,
+                  padding: "40px 36px",
+                  cursor: "pointer",
+                  borderTop: `2px solid ${selectedCity === i ? C.gold : "transparent"}`,
+                  transition: "all 0.3s cubic-bezier(0.16,1,0.3,1)",
+                  display: "flex", flexDirection: "column", gap: "12px",
+                }}
+              >
+                {/* Status badge */}
+                <div style={{
+                  display: "inline-flex", alignItems: "center", gap: "6px",
+                  fontFamily: F.sans, fontSize: "8px", fontWeight: 700,
+                  letterSpacing: "0.3em", textTransform: "uppercase",
+                  color: selectedCity === i ? C.gold : C.muted,
+                  transition: "color 0.3s",
+                }}>
+                  <div style={{
+                    width: "6px", height: "6px", borderRadius: "50%",
+                    background: "#4ADE80",
+                    boxShadow: "0 0 6px #4ADE80",
+                    animation: "pulse 2s ease-in-out infinite",
+                  }} />
+                  {t.status}
+                </div>
+
+                {/* City */}
+                <div style={{
+                  fontFamily: F.serif, fontSize: "clamp(22px,2.5vw,34px)", fontWeight: 600,
+                  color: C.cream, lineHeight: 1,
+                }}>
+                  {t.city}
+                </div>
+
+                {/* Date */}
+                <div style={{ fontFamily: F.sans, fontSize: "13px", color: selectedCity === i ? C.gold : C.muted }}>
+                  {t.date}
+                </div>
+
+                {/* Note */}
+                <div style={{ fontFamily: F.sans, fontSize: "10px", color: "rgba(255,255,255,0.3)", letterSpacing: "0.1em" }}>
+                  {t.note}
+                </div>
+
+                {/* CTA — always visible, prominent */}
+                <a
+                  href={t.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={e => e.stopPropagation()}
+                  style={{
+                    marginTop: "16px",
+                    fontFamily: F.sans, fontSize: "10px", fontWeight: 700,
+                    letterSpacing: "0.15em", textTransform: "uppercase",
+                    color: selectedCity === i ? "#07070a" : C.cream,
+                    background: selectedCity === i
+                      ? `linear-gradient(135deg, ${C.gold}, ${C.goldDeep})`
+                      : "transparent",
+                    border: selectedCity === i ? "none" : `1px solid rgba(255,255,255,0.15)`,
+                    padding: "14px 28px",
+                    textDecoration: "none", display: "inline-block",
+                    transition: "all 0.3s",
+                  }}
+                >
+                  Buy {t.city} Tickets →
+                </a>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
+        {/* ── GROUP / SCHOOL / PARTNER PATHS ── */}
+        <Reveal delay={0.2}>
+          <div style={{
+            background: C.surface, padding: "36px 40px",
+            display: "flex", justifyContent: "space-between", alignItems: "center",
+            flexWrap: "wrap", gap: "24px",
+            borderLeft: `2px solid ${C.gold}50`,
+          }}>
+            <div>
+              <div style={{ fontFamily: F.sans, fontSize: "9px", letterSpacing: "0.4em", textTransform: "uppercase", color: C.gold, marginBottom: "8px" }}>
+                Groups · Schools · Corporate
+              </div>
+              <div style={{ fontFamily: F.serif, fontSize: "clamp(18px,2vw,26px)", fontStyle: "italic", color: C.cream }}>
+                Bringing a group of 10 or more?
+              </div>
+            </div>
+            <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+              <a
+                href="mailto:foreverfutbolmuseum@gmail.com?subject=Group Booking Inquiry"
+                style={{
+                  fontFamily: F.sans, fontSize: "10px", fontWeight: 600,
+                  letterSpacing: "0.12em", textTransform: "uppercase",
+                  color: "#07070a", background: C.gold,
+                  padding: "13px 32px", textDecoration: "none", display: "inline-block",
+                  transition: "all 0.3s",
+                }}
+              >
+                Book a Group
+              </a>
+              <a
+                href="mailto:foreverfutbolmuseum@gmail.com?subject=School/Education Inquiry"
+                style={{
+                  fontFamily: F.sans, fontSize: "10px", fontWeight: 500,
+                  letterSpacing: "0.12em", textTransform: "uppercase",
+                  color: C.cream, background: "transparent",
+                  border: `1px solid ${C.border}`, padding: "13px 28px",
+                  textDecoration: "none", display: "inline-block",
+                  transition: "all 0.3s",
+                }}
+              >
+                School Programs
+              </a>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* Trust signals */}
+        <div style={{ marginTop: "32px", display: "flex", gap: "32px", justifyContent: "center", flexWrap: "wrap" }}>
+          {["Powered by Eventbrite", "Secure Checkout", "Instant Confirmation", "Refund Policy Applies"].map(s => (
+            <div key={s} style={{ fontFamily: F.sans, fontSize: "10px", color: "rgba(255,255,255,0.2)", letterSpacing: "0.15em" }}>
+              {s}
+            </div>
+          ))}
+        </div>
       </div>
+
+      <style>{`
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.4; }
+        }
+      `}</style>
     </section>
   );
 }
