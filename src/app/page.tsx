@@ -703,12 +703,7 @@ function MuseumTeaser() {
 
 // ─── TOUR CITIES ──────────────────────────────────────────────────────────────
 const CITIES = [
-  { city: "Atlanta", status: "Flagship", dates: "Spring 2026", note: "Premiere market. Rising football capital with global energy." },
-  { city: "Houston", status: "Upcoming", dates: "Summer 2026", note: "Diverse, international, built for a football audience that spans continents." },
-  { city: "Los Angeles", status: "Planned", dates: "Fall 2026", note: "Where entertainment, global culture, and the sport's future collide." },
-  { city: "Miami", status: "Planned", dates: "Q4 2026", note: "A natural home for football passion, international identity, and electric fan culture." },
-  { city: "New York", status: "TBD", dates: "2027", note: "A world city worthy of a world game." },
-  { city: "Chicago", status: "TBD", dates: "2027", note: "Historic, proud, positioned for large-scale cultural experiences." },
+  { city: "Atlanta", status: "Now Open", dates: "May 29 – July 6, 2026", note: "The flagship Forever Futbol Museum experience. Six weeks of football history, culture, and immersion." },
 ];
 
 function TourCities() {
@@ -904,24 +899,10 @@ function PullQuote() {
 const FF_TICKETS = [
   {
     city: "Atlanta",
-    date: "June 5, 2026",
+    date: "May 29 – July 6, 2026",
     status: "On Sale Now",
     url: "https://www.eventbrite.com/e/forever-futbol-tickets-1983442211046",
-    note: "Flagship Launch",
-  },
-  {
-    city: "Washington DC",
-    date: "June 15, 2026",
-    status: "On Sale Now",
-    url: "https://www.eventbrite.com/e/forever-futbol-tickets-1983442556078",
-    note: "East Coast Stop",
-  },
-  {
-    city: "Los Angeles",
-    date: "June 25, 2026",
-    status: "On Sale Now",
-    url: "https://www.eventbrite.com/e/forever-futbol-tickets-1983442708534",
-    note: "West Coast Stop",
+    note: "Flagship Experience · Atlanta",
   },
 ];
 
