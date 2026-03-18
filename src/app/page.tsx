@@ -198,7 +198,7 @@ function Hero() {
           />
         </div>
 
-        {/* RIGHT panel — FUTBOL.MP4 (mirrored) */}
+        {/* RIGHT panel — FUTBOL.MP4 (facing us) */}
         <div style={{ position: "relative", overflow: "hidden" }}>
           <video
             src="/museum/futbol-side.mp4"
@@ -213,7 +213,6 @@ function Hero() {
               objectPosition: "center",
               opacity: loaded ? 0.85 : 0,
               transition: "opacity 1.4s ease 0.15s",
-              transform: "scaleX(-1)",
             }}
           />
           {/* Soft inner edge blend toward center */}
