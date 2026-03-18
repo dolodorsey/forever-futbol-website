@@ -145,81 +145,100 @@ function Hero() {
         justifyContent: "flex-end",
       }}
     >
-      {/* ── VIDEO BACKGROUND — 3-panel layout ── */}
+      {/* ── VIDEO BACKGROUND — 3-panel triptych ── */}
       <div style={{
         position: "absolute", inset: 0,
-        display: "flex", alignItems: "center", justifyContent: "center",
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr 1fr",
+        gap: "3px",
         background: C.base,
+        padding: "0",
       }}>
-        {/* LEFT flanking video */}
-        <video
-          src="/museum/futbol-side.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          style={{
-            position: "absolute",
-            left: 0,
-            top: 0,
-            width: "22%",
-            height: "100%",
-            objectFit: "cover",
-            objectPosition: "center",
-            opacity: loaded ? 0.6 : 0,
-            transition: "opacity 1.4s ease 0.2s",
-            maskImage: "linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.9) 40%, transparent 100%)",
-            WebkitMaskImage: "linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.9) 40%, transparent 100%)",
-          }}
-        />
+        {/* LEFT panel — FUTBOL.MP4 */}
+        <div style={{ position: "relative", overflow: "hidden" }}>
+          <video
+            src="/museum/futbol-side.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center",
+              opacity: loaded ? 0.85 : 0,
+              transition: "opacity 1.4s ease 0.15s",
+            }}
+          />
+          {/* Soft inner edge blend toward center */}
+          <div style={{
+            position: "absolute", inset: 0, pointerEvents: "none",
+            background: "linear-gradient(to right, transparent 0%, transparent 60%, rgba(7,7,10,0.5) 100%)",
+          }} />
+        </div>
 
-        {/* CENTER hero reel */}
-        <video
-          ref={videoRef}
-          src="/museum/hero-reel.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          style={{
-            width: "auto",
-            height: "100%",
-            maxWidth: "100%",
-            objectFit: "contain",
-            opacity: loaded ? 1 : 0,
-            transition: "opacity 1.2s ease",
-            position: "relative",
-            zIndex: 2,
-          }}
-        />
+        {/* CENTER panel — hero-reel.mp4 (primary) */}
+        <div style={{ position: "relative", overflow: "hidden", zIndex: 2 }}>
+          <video
+            ref={videoRef}
+            src="/museum/hero-reel.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center",
+              opacity: loaded ? 1 : 0,
+              transition: "opacity 1.2s ease",
+            }}
+          />
+        </div>
 
-        {/* RIGHT flanking video */}
-        <video
-          src="/museum/futbol-side.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          style={{
-            position: "absolute",
-            right: 0,
-            top: 0,
-            width: "22%",
-            height: "100%",
-            objectFit: "cover",
-            objectPosition: "center",
-            opacity: loaded ? 0.6 : 0,
-            transition: "opacity 1.4s ease 0.2s",
-            transform: "scaleX(-1)",
-            maskImage: "linear-gradient(to left, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.9) 40%, transparent 100%)",
-            WebkitMaskImage: "linear-gradient(to left, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.9) 40%, transparent 100%)",
-          }}
-        />
+        {/* RIGHT panel — FUTBOL.MP4 (mirrored) */}
+        <div style={{ position: "relative", overflow: "hidden" }}>
+          <video
+            src="/museum/futbol-side.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center",
+              opacity: loaded ? 0.85 : 0,
+              transition: "opacity 1.4s ease 0.15s",
+              transform: "scaleX(-1)",
+            }}
+          />
+          {/* Soft inner edge blend toward center */}
+          <div style={{
+            position: "absolute", inset: 0, pointerEvents: "none",
+            background: "linear-gradient(to left, transparent 0%, transparent 60%, rgba(7,7,10,0.5) 100%)",
+          }} />
+        </div>
 
-        {/* Cinematic side-fill bars — outer edge fade */}
+        {/* Cinematic outer edge vignette */}
         <div style={{
           position: "absolute", inset: 0, pointerEvents: "none", zIndex: 3,
-          background: `linear-gradient(to right, ${C.base} 0%, transparent 8%, transparent 92%, ${C.base} 100%)`,
+          background: `linear-gradient(to right, ${C.base} 0%, transparent 5%, transparent 95%, ${C.base} 100%)`,
+        }} />
+
+        {/* Thin gold divider lines between panels */}
+        <div style={{
+          position: "absolute", left: "33.33%", top: "10%", bottom: "10%", width: "1px",
+          background: `linear-gradient(to bottom, transparent, ${C.gold}30, ${C.gold}15, transparent)`,
+          zIndex: 4, pointerEvents: "none",
+        }} />
+        <div style={{
+          position: "absolute", left: "66.66%", top: "10%", bottom: "10%", width: "1px",
+          background: `linear-gradient(to bottom, transparent, ${C.gold}30, ${C.gold}15, transparent)`,
+          zIndex: 4, pointerEvents: "none",
         }} />
       </div>
 
