@@ -1127,7 +1127,7 @@ function Footer() {
 // ─── ROOT ─────────────────────────────────────────────────────────────────────
 export default function ForeverFutbolV4() {
   return (
-    <div style={{ background: C.base }}>
+    <div style={{ background: C.base ,overflowX:'hidden'}}>
       <Nav />
       <Hero />
       <BrandStatement />
