@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 const SUPABASE_URL = "https://dzlmtvodpyhetvektfuo.supabase.co";
-const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR6bG10dm9kcHloZXR2ZWt0ZnVvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA4NTk2NTQsImV4cCI6MjA1NjQzNTY1NH0.L5t3EM0hMLEVkMhJGCFwhMJGmxX5b1GCTchPMiTGCaI";
+const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR6bG10dm9kcHloZXR2ZWt0ZnVvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk1ODQ4NjQsImV4cCI6MjA4NTE2MDg2NH0.qmnWB4aWdb7U8Iod9Hv8PQAOJO3AG0vYEGnPS--kfAo";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
