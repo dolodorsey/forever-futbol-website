@@ -110,17 +110,18 @@ function Nav() {
             {n}
           </a>
         ))}
-        <button
+        <a
+          href="#tickets"
           style={{
             fontFamily: F.sans, fontSize: "10px", fontWeight: 600,
             letterSpacing: "0.14em", textTransform: "uppercase",
             color: "#07070a", background: `linear-gradient(135deg, ${C.gold}, ${C.goldDeep})`,
             border: "none", padding: "11px 28px", cursor: "pointer",
-            transition: "all 0.3s",
+            transition: "all 0.3s", textDecoration: "none", display: "inline-block",
           }}
         >
           Get Tickets
-        </button>
+        </a>
       </div>
     </nav>
   );
@@ -1063,6 +1064,88 @@ function Tickets() {
             </div>
           ))}
         </div>
+
+        {/* ── CREDENTIAL TICKET + TIME SLOT SELECTION ── */}
+        <Reveal delay={0.3}>
+          <div style={{
+            marginTop: "48px",
+            display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "2px",
+            background: `${C.gold}15`,
+          }}>
+            {/* Credential Ticket */}
+            <div style={{
+              background: C.surface, padding: "40px 36px",
+              borderLeft: `2px solid ${C.teal}`,
+            }}>
+              <div style={{
+                fontFamily: F.sans, fontSize: "8px", fontWeight: 700,
+                letterSpacing: "0.3em", textTransform: "uppercase",
+                color: C.teal, marginBottom: "12px",
+                display: "flex", alignItems: "center", gap: "6px",
+              }}>
+                <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: C.teal, boxShadow: `0 0 6px ${C.teal}` }} />
+                Free for Soccer Professionals
+              </div>
+              <div style={{ fontFamily: F.serif, fontSize: "clamp(18px,2vw,26px)", fontWeight: 600, color: C.cream, lineHeight: 1.1, marginBottom: "8px" }}>
+                Credential Ticket
+              </div>
+              <div style={{ fontFamily: F.sans, fontSize: "13px", color: C.muted, lineHeight: 1.6, marginBottom: "20px" }}>
+                Coaches, directors, referees, staff, and players — claim your complimentary credential ticket. Share your group code with your entire organization.
+              </div>
+              <a
+                href="https://ff-ticket-form.vercel.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  fontFamily: F.sans, fontSize: "10px", fontWeight: 700,
+                  letterSpacing: "0.15em", textTransform: "uppercase",
+                  color: "#07070a", background: C.teal,
+                  padding: "14px 32px", textDecoration: "none", display: "inline-block",
+                  transition: "all 0.3s",
+                }}
+              >
+                Claim Free Ticket →
+              </a>
+            </div>
+
+            {/* Time Slot Selection */}
+            <div style={{
+              background: C.surface, padding: "40px 36px",
+              borderLeft: `2px solid ${C.gold}`,
+            }}>
+              <div style={{
+                fontFamily: F.sans, fontSize: "8px", fontWeight: 700,
+                letterSpacing: "0.3em", textTransform: "uppercase",
+                color: C.gold, marginBottom: "12px",
+                display: "flex", alignItems: "center", gap: "6px",
+              }}>
+                <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: C.gold, boxShadow: `0 0 6px ${C.gold}` }} />
+                Opens April 29, 2026
+              </div>
+              <div style={{ fontFamily: F.serif, fontSize: "clamp(18px,2vw,26px)", fontWeight: 600, color: C.cream, lineHeight: 1.1, marginBottom: "8px" }}>
+                Select Your Time Slot
+              </div>
+              <div style={{ fontFamily: F.sans, fontSize: "13px", color: C.muted, lineHeight: 1.6, marginBottom: "20px" }}>
+                Already have a credential ticket? Choose your preferred visit date and time. 75 guests per slot — first come, first served.
+              </div>
+              <a
+                href="https://ff-ticket-form.vercel.app/select-slot.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  fontFamily: F.sans, fontSize: "10px", fontWeight: 700,
+                  letterSpacing: "0.15em", textTransform: "uppercase",
+                  color: "#07070a",
+                  background: `linear-gradient(135deg, ${C.gold}, ${C.goldDeep})`,
+                  padding: "14px 32px", textDecoration: "none", display: "inline-block",
+                  transition: "all 0.3s",
+                }}
+              >
+                Select Time Slot →
+              </a>
+            </div>
+          </div>
+        </Reveal>
       </div>
 
       <style>{`
