@@ -111,7 +111,7 @@ function Nav() {
           </a>
         ))}
         <a
-          href="#tickets"
+          href="/tickets"
           style={{
             fontFamily: F.sans, fontSize: "10px", fontWeight: 600,
             letterSpacing: "0.14em", textTransform: "uppercase",
@@ -282,7 +282,7 @@ function Hero() {
             transition: "opacity 0.9s ease 0.4s",
           }}
         >
-          Touring Museum · Global Football Culture
+          Atlanta · May 29 – July 6 · Fri / Sat / Sun · Noon – 9 PM
         </div>
 
         {/* Brand wordmark */}
@@ -337,7 +337,7 @@ function Hero() {
           }}
         >
           <a
-            href="#tickets"
+            href="/tickets"
             style={{
               fontFamily: F.sans, fontSize: "10px", fontWeight: 600,
               letterSpacing: "0.15em", textTransform: "uppercase",
@@ -614,7 +614,8 @@ function Exhibits() {
               </p>
 
               {/* CTA */}
-              <div
+              <a
+                href="/tickets"
                 style={{
                   fontFamily: F.sans, fontSize: "9px", fontWeight: 600,
                   letterSpacing: "0.28em", textTransform: "uppercase",
@@ -622,10 +623,12 @@ function Exhibits() {
                   opacity: active === i ? 1 : 0,
                   transform: active === i ? "translateY(0)" : "translateY(8px)",
                   transition: "all 0.4s ease 0.1s",
+                  textDecoration: "none", display: "inline-block",
+                  pointerEvents: active === i ? "auto" : "none",
                 }}
               >
                 Explore Exhibit →
-              </div>
+              </a>
 
               {/* Accent line */}
               <div
@@ -789,18 +792,20 @@ function TourCities() {
                   </div>
                 ))}
               </div>
-              <button
+              <a
+                href="/tickets"
                 style={{
                   marginTop: "36px", fontFamily: F.sans, fontSize: "10px", fontWeight: 600,
                   letterSpacing: "0.15em", textTransform: "uppercase",
                   color: "#07070a", background: `linear-gradient(135deg, ${C.gold}, ${C.goldDeep})`,
                   border: "none", padding: "14px 40px", cursor: "pointer", transition: "all 0.3s",
+                  textDecoration: "none", display: "inline-block",
                 }}
-                onMouseEnter={(e) => ((e.currentTarget as HTMLButtonElement).style.transform = "translateY(-2px)")}
-                onMouseLeave={(e) => ((e.currentTarget as HTMLButtonElement).style.transform = "translateY(0)")}
+                onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.transform = "translateY(-2px)")}
+                onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.transform = "translateY(0)")}
               >
                 Get {city.city} Tickets
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -896,13 +901,13 @@ function PullQuote() {
 }
 
 // ─── TICKETS ──────────────────────────────────────────────────────────────────
-// ─── TICKET DATA — LIVE EVENTBRITE ───────────────────────────────────────────
+// ─── TICKET DATA — IN-HOUSE /tickets PAGE ────────────────────────────────────
 const FF_TICKETS = [
   {
     city: "Atlanta",
     date: "May 29 – July 6, 2026",
     status: "On Sale Now",
-    url: "https://www.eventbrite.com/e/forever-futbol-tickets-1983442211046",
+    url: "/tickets",
     note: "Flagship Experience · Atlanta",
   },
 ];
@@ -986,8 +991,6 @@ function Tickets() {
                 {/* CTA — always visible, prominent */}
                 <a
                   href={t.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   onClick={e => e.stopPropagation()}
                   style={{
                     marginTop: "16px",
@@ -1058,7 +1061,7 @@ function Tickets() {
 
         {/* Trust signals */}
         <div style={{ marginTop: "32px", display: "flex", gap: "32px", justifyContent: "center", flexWrap: "wrap" }}>
-          {["Powered by Eventbrite", "Secure Checkout", "Instant Confirmation", "Refund Policy Applies"].map(s => (
+          {["In-House Booking", "Secure Checkout", "Instant Confirmation", "Refund Policy Applies"].map(s => (
             <div key={s} style={{ fontFamily: F.sans, fontSize: "10px", color: "rgba(255,255,255,0.2)", letterSpacing: "0.15em" }}>
               {s}
             </div>
@@ -1178,7 +1181,7 @@ function Footer() {
           {[
             { h: "Experience", l: ["Hall of Legends", "World Cup Theater", "Boots & Culture", "Street to Stadium", "The Beautiful Game"] },
             { h: "Visit", l: ["Get Tickets", "Group Bookings", "School Programs", "Corporate Events", "Accessibility"] },
-            { h: "Partners", l: ["Sponsors", "Tourism Partners", "Media & Press", "Brand Activations", "foreverfutbolmuseum@gmail.com"] },
+            { h: "Connect", l: ["@foreverfutbol.museum", "765-6-SOCCER", "foreverfutbolmuseum@gmail.com", "Sponsors", "Media & Press"] },
           ].map((col) => (
             <div key={col.h}>
               <div style={{ fontFamily: F.sans, fontSize: "8px", fontWeight: 600, letterSpacing: "0.4em", textTransform: "uppercase", color: C.gold, marginBottom: "20px" }}>
