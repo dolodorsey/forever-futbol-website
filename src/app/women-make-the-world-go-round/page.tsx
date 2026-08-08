@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { MuseumPage, museumConfigs } from "@/components/MuseumPortfolio";
+import { WomenMuseumView } from "@/components/MuseumViews";
 
 export const metadata: Metadata = {
   title: "Women Make the World Go Round — Scented Flowers",
@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function WomenMuseumPage() {
-  return <MuseumPage config={museumConfigs["women-make-the-world-go-round"]} />;
+  return <WomenMuseumView />;
 }
