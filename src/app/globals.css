@@ -6,3 +6,5 @@
 html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
 body { overflow-x: hidden; background: #0E1014; color: #F2EEE5; }
 ::selection { background: rgba(198, 166, 91, 0.4); color: #F2EEE5; }
+.sf-card > span { top: 28px !important; left: 32px; }
+.sf-card > b { top: 24px !important; right: 30px !important; }
