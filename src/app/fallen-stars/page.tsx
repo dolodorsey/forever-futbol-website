@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { MuseumPage, museumConfigs } from "@/components/MuseumPortfolio";
+import { FallenStarsView } from "@/components/MuseumViews";
 
 export const metadata: Metadata = {
   title: "Fallen Stars — Scented Flowers",
@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function FallenStarsPage() {
-  return <MuseumPage config={museumConfigs["fallen-stars"]} />;
+  return <FallenStarsView />;
 }
