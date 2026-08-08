@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { MuseumPage, museumConfigs } from "@/components/MuseumPortfolio";
+import { LivingLegendsView } from "@/components/MuseumViews";
 
 export const metadata: Metadata = {
   title: "Living Legends — Scented Flowers",
@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function LivingLegendsPage() {
-  return <MuseumPage config={museumConfigs["living-legends"]} />;
+  return <LivingLegendsView />;
 }
