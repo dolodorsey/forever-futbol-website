@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ScentedFlowersHome } from "@/components/MuseumPortfolio";
+import { ScentedFlowersPublic } from "@/components/MuseumPublic";
 import { MuseumEnhancements } from "@/components/MuseumEnhancements";
 
 export const metadata: Metadata = {
@@ -11,7 +11,7 @@ const familyCities = ["Miami","Orlando","Houston","Tampa","Atlanta","Memphis","S
 
 export default function ScentedFlowersPage() {
   return <>
-    <ScentedFlowersHome />
+    <ScentedFlowersPublic />
     <MuseumEnhancements museumSlug="scented-flowers" museumName="Scented Flowers" cities={familyCities} accent="#d3aa4a" accent2="#e5c879" />
   </>;
 }
