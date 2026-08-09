@@ -10,6 +10,8 @@ export default function robots(): MetadataRoute.Robots {
           "/living-legends/*",
           "/fallen-stars/*",
           "/women-make-the-world-go-round/*",
+          "/museum-boh",
+          "/museum-boh/*",
         ],
       },
     ],
