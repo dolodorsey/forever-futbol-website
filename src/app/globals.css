@@ -8,3 +8,28 @@ body { overflow-x: hidden; background: #0E1014; color: #F2EEE5; }
 ::selection { background: rgba(198, 166, 91, 0.4); color: #F2EEE5; }
 .sf-card > span { top: 28px !important; left: 32px; }
 .sf-card > b { top: 24px !important; right: 30px !important; }
+
+/* Premium museum family typography + interaction layer. Scoped so Forever Futbol remains unchanged. */
+.mx-page, .sf-final,
+.mx-page button, .mx-page input, .mx-page select, .mx-page textarea,
+.sf-final button, .sf-final input, .sf-final select, .sf-final textarea {
+  font-family: 'DM Sans', Arial, Helvetica, sans-serif !important;
+}
+.mx-page h1, .mx-page h2, .mx-page h3,
+.sf-final h1, .sf-final h2, .sf-final h3,
+.mx-page .mx-tagline, .mx-page .mx-market-status strong,
+.mx-page .mx-feature-grid strong, .mx-page .mx-journey-track small,
+.sf-final .sf-portal-copy h3, .sf-final .sf-model-steps h3 {
+  font-family: 'EB Garamond', Georgia, 'Times New Roman', serif !important;
+}
+.mx-page a, .sf-final a, .mx-page button, .sf-final button {
+  transition: opacity .25s ease, transform .25s ease, border-color .25s ease, background-color .25s ease, color .25s ease;
+}
+.mx-page a:hover, .sf-final a:hover { opacity: 1; }
+.mx-page .mx-primary:hover, .sf-final .mx-primary:hover { transform: translateY(-2px); filter: brightness(1.06); }
+.mx-page .mx-secondary:hover, .mx-page .mx-nav-cta:hover, .sf-final .mx-nav-cta:hover { border-color: currentColor; background: rgba(255,255,255,.07); }
+.mx-page button:focus-visible, .mx-page a:focus-visible, .mx-page input:focus-visible, .mx-page select:focus-visible, .mx-page textarea:focus-visible,
+.sf-final button:focus-visible, .sf-final a:focus-visible, .sf-final input:focus-visible, .sf-final select:focus-visible, .sf-final textarea:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
