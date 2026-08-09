@@ -1,17 +1,11 @@
 import type { Metadata } from "next";
-import { ScentedFlowersPublicOps } from "@/components/MuseumPublicOps";
-import { MuseumEnhancements } from "@/components/MuseumEnhancements";
+import { ScentedFlowersFinal } from "@/components/MuseumExperienceFinal";
 
 export const metadata: Metadata = {
-  title: "Scented Flowers — A House of Cultural Museums",
-  description: "The parent platform for Living Legends, Fallen Stars, Women Make the World Go Round, and Forever Futbol.",
+  title: "Scented Flowers — The Mother Museum",
+  description: "The cultural museum house connecting Living Legends, Fallen Stars, Women Make the World Go Round, and Forever Futbol through distinct museum worlds and evolving annual collections.",
 };
 
-const familyCities = ["Miami","Orlando","Houston","Tampa","Atlanta","Memphis","Savannah","Dallas","New York","Denver","Washington, D.C.","Las Vegas","Los Angeles","Charlotte","Nashville","Birmingham"];
-
 export default function ScentedFlowersPage() {
-  return <>
-    <ScentedFlowersPublicOps />
-    <MuseumEnhancements museumSlug="scented-flowers" museumName="Scented Flowers" cities={familyCities} accent="#d3aa4a" accent2="#e5c879" />
-  </>;
+  return <ScentedFlowersFinal />;
 }

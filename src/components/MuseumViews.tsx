@@ -1,15 +1,15 @@
 "use client";
 
-import { LivingLegendsPublicOps, FallenStarsPublicOps, WomenPublicOps } from "./MuseumPublicOps";
+import { LivingLegendsFinal, FallenStarsFinal, WomenFinal } from "./MuseumExperienceFinal";
 
 export function LivingLegendsView() {
-  return <LivingLegendsPublicOps />;
+  return <LivingLegendsFinal />;
 }
 
 export function FallenStarsView() {
-  return <FallenStarsPublicOps />;
+  return <FallenStarsFinal />;
 }
 
 export function WomenMuseumView() {
-  return <WomenPublicOps />;
+  return <WomenFinal />;
 }
