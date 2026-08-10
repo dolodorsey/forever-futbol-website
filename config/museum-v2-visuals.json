@@ -1,0 +1,69 @@
+{
+  "version": "museum-v2",
+  "status": "canonical",
+  "updated": "2026-08-09",
+  "rules": {
+    "publicVisualCollection": "museum-v2",
+    "legacyCollectionsAllowed": false,
+    "publicHonoreeRosterAllowed": false,
+    "foreverFutbolModified": false
+  },
+  "supabase": {
+    "project": "wfkohcwxxsrhcxhepfql",
+    "bucket": "museum-public",
+    "view": "museum_public_visuals_v2",
+    "baseUrl": "https://wfkohcwxxsrhcxhepfql.supabase.co/storage/v1/object/public/museum-public/museums/"
+  },
+  "museums": {
+    "scented-flowers": {
+      "hero": "museums/scented-flowers/v2/family-01.webp",
+      "familyScenes": [
+        "museums/scented-flowers/v2/family-01.webp",
+        "museums/scented-flowers/v2/family-02.webp",
+        "museums/scented-flowers/v2/family-03.webp",
+        "museums/scented-flowers/v2/family-04.webp"
+      ],
+      "motherScenes": [
+        "museums/scented-flowers/v2/scented-01.webp",
+        "museums/scented-flowers/v2/scented-02.webp",
+        "museums/scented-flowers/v2/scented-03.webp",
+        "museums/scented-flowers/v2/scented-04.webp",
+        "museums/scented-flowers/v2/scented-05.webp",
+        "museums/scented-flowers/v2/scented-06.webp"
+      ]
+    },
+    "living-legends": {
+      "hero": "museums/living-legends/v2/living-01.webp",
+      "scenes": [
+        "museums/living-legends/v2/living-01.webp",
+        "museums/living-legends/v2/living-02.webp",
+        "museums/living-legends/v2/living-03.webp",
+        "museums/living-legends/v2/living-04.webp",
+        "museums/living-legends/v2/living-05.webp",
+        "museums/living-legends/v2/living-06.webp"
+      ]
+    },
+    "fallen-stars": {
+      "hero": "museums/fallen-stars/v2/fallen-01.webp",
+      "scenes": [
+        "museums/fallen-stars/v2/fallen-01.webp",
+        "museums/fallen-stars/v2/fallen-02.webp",
+        "museums/fallen-stars/v2/fallen-03.webp",
+        "museums/fallen-stars/v2/fallen-04.webp",
+        "museums/fallen-stars/v2/fallen-05.webp",
+        "museums/fallen-stars/v2/fallen-06.webp"
+      ]
+    },
+    "women-make-the-world-go-round": {
+      "hero": "museums/women-make-the-world-go-round/v2/women-01.webp",
+      "scenes": [
+        "museums/women-make-the-world-go-round/v2/women-01.webp",
+        "museums/women-make-the-world-go-round/v2/women-02.webp",
+        "museums/women-make-the-world-go-round/v2/women-03.webp",
+        "museums/women-make-the-world-go-round/v2/women-04.webp",
+        "museums/women-make-the-world-go-round/v2/women-05.webp",
+        "museums/women-make-the-world-go-round/v2/women-06.webp"
+      ]
+    }
+  }
+}
