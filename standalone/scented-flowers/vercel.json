@@ -1,0 +1,27 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/", "destination": "/v3/index.html" },
+    { "source": "/living-legends", "destination": "/v3/living-legends/index.html" },
+    { "source": "/fallen-stars", "destination": "/v3/fallen-stars/index.html" },
+    { "source": "/women-make-the-world-go-round", "destination": "/v3/women-make-the-world-go-round/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/app-v3.js",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }]
+    },
+    {
+      "source": "/styles-v3.css",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    }
+  ]
+}
