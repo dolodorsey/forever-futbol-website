@@ -1,0 +1,1 @@
+@media (min-width:721px) and (max-width:1180px){.hero>img,.mother-hero>img,.scene>img,.portal>img{object-position:var(--tablet-pos,var(--desk-pos,50% 50%))!important}}@media (max-width:720px){.hero>img,.mother-hero>img,.scene>img,.portal>img{object-position:var(--mobile-pos,var(--desk-pos,50% 50%))!important}}
